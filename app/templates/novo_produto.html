@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'title' %}
+Novo Produto
+{% endblock %}
+
+{% block 'head' %}
+<link rel="stylesheet" href="{% static 'css/novo_produto.css'%}">
+{% endblock %}
+
+{% block 'content' %}
+<h1>Novo Produto</h1>
+<br>
+
+<form action="{% url 'novo_produto' %}" method="POST">
+    {% csrf_token %}
+
+    <ul>
+        {{ form.as_ul }}
+
+        <li><input type="submit" value="Submit" class="feio"></li>
+    </ul>
+</form>
+
+{% endblock %}
