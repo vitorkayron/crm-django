@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block 'title' %}
+{% endblock %}
+
+{% block 'head' %}
+{% endblock %}
+
+{% block 'content' %}
+<h1>Atualizar Produto</h1>
+
+
+
+<form action="{% url 'atualizar_produto' id=produto.id %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Atualizar">
+  </form>
+  {% endblock %}
+{% endblock %}

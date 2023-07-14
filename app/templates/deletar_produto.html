@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block 'title' %}
+{% endblock %}
+
+{% block 'head' %}
+{% endblock %}
+
+{% block 'content' %}
+<h1>Deletar Produto</h1>
+
+<h2>Você quer deletar mesmo o produto {{produto.nome}} ? </h2>
+
+<form action="{% url 'deletar_produto' id=produto.id %}" method="POST">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" value="Deletar">
+</form>
+{% endblock %}
