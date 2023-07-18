@@ -95,6 +95,7 @@ Video
   <h3>{{ produto.valor }}</h3>
   <h4>{{ produto.quantidade_estoque }}</h4>
   <a href="{% url 'venda' produto.id %}">Vender Produto</a>
+  <a href="{% url 'deletar_produto' produto.id %}">Deletar produto</a>
 {% endfor %}
 
 {% endblock %}

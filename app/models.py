@@ -9,7 +9,7 @@ class Produto(models.Model):
         return self.nome
     
 class Venda(models.Model):
-    produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
+    produto = models.ForeignKey(Produto, on_delete=models.SET_NULL, null=True)
     quantidade_vendida = models.PositiveIntegerField(default=0)
     data_venda = models.DateField(auto_now_add=True)
     valor_venda = models.DecimalField(max_digits=1000, decimal_places=3, default=0)
@@ -22,7 +22,7 @@ class Venda(models.Model):
         super().save(*args, **kwargs)
         
 class Saldo(models.Model):
-    produto = models.OneToOneField(Produto, on_delete=models.CASCADE, null=True)
+    produto = models.OneToOneField(Produto, on_delete=models.SET_NULL, null=True)
     faturamento = models.DecimalField(max_digits=1000, decimal_places=3, default=0)
 
     def __str__(self):

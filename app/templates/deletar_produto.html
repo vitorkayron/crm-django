@@ -13,7 +13,7 @@
 
 <h2>Você quer deletar mesmo o produto {{produto.nome}} ? </h2>
 
-<form action="{% url 'deletar_produto' id=produto.id %}" method="POST">
+<form action="{% url 'deletar_produto' pk=produto.id %}" method="POST">
   {% csrf_token %}
   {{ form.as_p }}
   <input type="submit" value="Deletar">

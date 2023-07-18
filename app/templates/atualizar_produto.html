@@ -13,9 +13,10 @@
 
 
 
-<form action="{% url 'atualizar_produto' id=produto.id %}" method="POST">
+<form action="{% url 'atualizar_produto' pk=produto.id %}" method="POST">
     {% csrf_token %}
+    <input type="hidden" name="id" value="{{ produto.id }}">
+    {{ form.as_p }}
     <input type="submit" value="Atualizar">
   </form>
-  {% endblock %}
 {% endblock %}
