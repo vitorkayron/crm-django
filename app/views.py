@@ -1,10 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 from .forms import Novo_Produto
-from .models import Produto
-
+from .models import Produto, Saldo
+from django.contrib import messages
 # Create your views here.
 def home(request):
-    return render(request, 'home.html')
+    produtos = Produto.objects.all()
+    return render(request, 'home.html', {'produtos': produtos})
 # def novo_produto(request):
 #     if request.method == "POST":
 
@@ -42,3 +43,26 @@ def atualizar_produto(request, id):
         form = Novo_Produto(instance=produto)
 
     return render(request, 'atualizar_produto.html', {'produto': produto, 'form': form})
+
+def venda(request, id):
+    produto = get_object_or_404(Produto, id=id)
+    if request.method == 'POST':
+        quantidade = int(request.POST.get('quantidade'))
+
+        if quantidade > produto.quantidade_estoque:
+            messages.error(request, f"A quantidade solicitada ({quantidade}) é maior do que o estoque disponível ({produto.quantidade_estoque}).")
+        else:
+            produto.quantidade_estoque -= quantidade
+            produto.save()
+
+            # Atualiza o saldo
+            saldo, _ = Saldo.objects.get_or_create(produto=produto)
+            saldo.faturamento += produto.valor * quantidade
+            saldo.save()
+
+            return redirect('/')
+
+    return render(request, 'vendas.html', {'produto': produto})
+ 
+            
+            

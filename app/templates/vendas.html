@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block 'title' %}
+{% endblock %}
+
+{% block 'content' %}
+<h1>Vender Produto</h1>
+
+<form method="POST" action="{% url 'venda' produto.id %}">
+    {% csrf_token %}
+    
+    <label for="quantidade">Quantidade:</label>
+    <input type="number" name="quantidade" id="quantidade" min="1" max="{{ produto.quantidade_estoque }}">
+    
+    <input type="submit" value="Vender">
+</form>
+{% endblock %}
