@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 from .forms import Novo_Produto
-from .models import Produto, Saldo
+from .models import Produto, Saldo, Venda
 from django.contrib import messages
 from django.views.generic.list import ListView
 from django.views.generic import CreateView
@@ -11,10 +11,23 @@ from django.urls import reverse_lazy
 # def home(request):
 #     produtos = Produto.objects.all()
 #     return render(request, 'home.html', {'produtos': produtos})
+
+def calcular_faturamento():
+    saldos = Saldo.objects.all()
+    faturamento_total = sum(saldo.faturamento for saldo in saldos)
+    return faturamento_total
+            
+
 class HomeListView(ListView):
     template_name = "home.html"
     model = Produto
     context_object_name = "produtos"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        faturamento_total = calcular_faturamento()
+        context['faturamento_total'] = faturamento_total
+        return context
 
 class NovoProdutoCreateView(CreateView):
     template_name = "novo_produto.html"
@@ -84,14 +97,19 @@ def venda(request, id):
             produto.quantidade_estoque -= quantidade
             produto.save()
 
+            venda = Venda(produto=produto, quantidade_vendida=quantidade, valor_venda=produto.valor * quantidade)
+            venda.save()
+
             # Atualiza o saldo
             saldo, _ = Saldo.objects.get_or_create(produto=produto)
             saldo.faturamento += produto.valor * quantidade
             saldo.save()
 
+            
+
             return redirect('/')
 
     return render(request, 'vendas.html', {'produto': produto})
  
-            
+
             
