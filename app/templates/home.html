@@ -28,7 +28,7 @@ Video
 </header>
 <main class="container-fluid my-2 table-responsive" style="width:90% ;">
     <button class="my-2">
-        <a class="icon-link color-" href="{% url 'novo_produto' %}">
+        <a class="icon-link btn" href="{% url 'novo_produto' %}">
             Adicionar novo produto
         </a>
     </button>
@@ -44,58 +44,29 @@ Video
             </tr>
         </thead>
         <tbody>
+            {% for produto in produtos %}
             <tr>
-                <td>SOFÁ</td>
-                <td> R$ 829,00</td>
-                <td>9.173 itens</td>
+                <td>{{ produto.nome }}</td>
+                <td> R$ {{ produto.valor }}</td>
+                <td>{{ produto.quantidade_estoque }} itens</td>
                 <td>
-                    <button>ATUALIZAR</button>
+                    <a class="btn btn-outline-primary" href="{% url 'atualizar_produto' produto.id %}">Atualizar</a>
                 </td>
                 <td>
-                    <button>DELETAR</button>
+                    <a class="btn btn-outline-warning" href="{% url 'deletar_produto' produto.id %}">Deletar</a>
                 </td>
                 <td>
-                    <button>VENDER</button>
+                    <a class="btn btn-outline-success" href="{% url 'venda' produto.id %}">Vender</a>
                 </td>
             </tr>
-            <tr>
-                <td>SOFÁ</td>
-                <td> R$ 829,00</td>
-                <td>9.173 itens</td>
-                <td>
-                    <button>ATUALIZAR</button>
-                </td>
-                <td>
-                    <button>DELETAR</button>
-                </td>
-                <td>
-                    <button>VENDER</button>
-                </td>
-            </tr>
-            <tr>
-                <td>SOFÁ</td>
-                <td> R$ 829,00</td>
-                <td>9.173 itens</td>
-                <td>
-                    <button class="align-center">ATUALIZAR</button>
-                </td>
-                <td>
-                    <button>DELETAR</button>
-                </td>
-                <td>
-                    <button>VENDER</button>
-                </td>
-            </tr>
+            {% endfor %}
         </tbody>
     </table>
 </main>
 
-{% for produto in produtos %}
-  <h2>{{ produto.nome }}</h2>
-  <h3>{{ produto.valor }}</h3>
-  <h4>{{ produto.quantidade_estoque }}</h4>
-  <a href="{% url 'venda' produto.id %}">Vender Produto</a>
-  <a href="{% url 'deletar_produto' produto.id %}">Deletar produto</a>
-{% endfor %}
+
+  <h2></h2>
+  <h4></h4>
+  
 
 {% endblock %}
