@@ -15,7 +15,7 @@ class Venda(models.Model):
     valor_venda = models.DecimalField(max_digits=1000, decimal_places=3, default=0)
 
     def __str__(self):
-        return f"Saldo de {self.produto.nome} - {self.quantidade_vendida} vendido(s)"
+        return self.valor_venda
 
     def save(self, *args, **kwargs):
         self.valor_venda = self.produto.valor * self.quantidade_vendida
@@ -26,7 +26,7 @@ class Saldo(models.Model):
     faturamento = models.DecimalField(max_digits=1000, decimal_places=3, default=0)
 
     def __str__(self):
-        return str(self.faturamento)
+        return str(self.produto)
 
     def atualizar_saldo(self):
         total_vendas = Venda.objects.filter(produto=self.produto).aggregate(total=models.Sum('valor_venda'))['total']
