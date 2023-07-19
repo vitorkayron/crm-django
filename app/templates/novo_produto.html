@@ -6,21 +6,31 @@ Novo Produto
 {% endblock %}
 
 {% block 'head' %}
-<link rel="stylesheet" href="{% static 'css/novo_produto.css'%}">
 {% endblock %}
 
 {% block 'content' %}
-<h1>Novo Produto</h1>
-<br>
+<header>
+    <div class="container-fluid card d-flex justify-content-center align-items-center m-auto bg-primary-subtle">
+        <h1>CRM</h1>
+        <h2>Cadastrar novo produto</h2>
+    </div>
+</header>
+<main>
+    <div
+    class="content-fluid d-flex flex-column justify-content-center align-items-center m-auto mt-2"
+    style="width:90% ;">
+        <form class="content-fluid card p-4 gap-2"
+        action="{% url 'novo_produto' %}"
+        method="POST">
+            {% csrf_token %}
+                {{ form.as_p }}
+            <button type="submit" value="Submit" class="btn btn-outline-secondary btn-sm">Cadastrar</button>
+            <a href="{% url 'home' %}" class="btn btn-outline-danger btn-sm">Cancelar</a>
+        </form>
+    </div>
+</main>
+    
+    
 
-<form action="{% url 'novo_produto' %}" method="POST">
-    {% csrf_token %}
-
-    <ul>
-        {{ form.as_ul }}
-
-        <li><input type="submit" value="Submit" class="feio"></li>
-    </ul>
-</form>
 
 {% endblock %}
