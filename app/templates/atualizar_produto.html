@@ -9,14 +9,39 @@
 {% endblock %}
 
 {% block 'content' %}
-<h1>Atualizar Produto</h1>
+<header>
+  <div
+  class="container-fluid card d-flex justify-content-center
+  align-items-center m-auto bg-primary-subtle">
+      <h1>CRM</h1>
+      <h2>Atualizar produto</h2>
+  </div>
+</header>
+<main>
+  <div
+  class="content-fluid d-flex flex-column justify-content-center
+  align-items-center m-auto mt-2"
+  style="width:90% ;">
+      <form class="content-fluid card p-4 gap-2"
+      action="{% url 'atualizar_produto' pk=produto.id %}"
+      method="POST">
+        {% csrf_token %}
+          <input type="hidden" name="id" value="{{ produto.id }}">
+          {{ form.as_p }}
+          <button
+          class="btn btn-outline-danger"
+          type="submit" value="Submit">Atualizar</button>
+          <a
+          class="btn btn-outline-secondary btn-sm"
+          href="{% url 'home' %}">Cancelar</a>
+      </form>
+  </div>
+</main>
 
 
 
-<form action="{% url 'atualizar_produto' pk=produto.id %}" method="POST">
-    {% csrf_token %}
-    <input type="hidden" name="id" value="{{ produto.id }}">
-    {{ form.as_p }}
-    <input type="submit" value="Atualizar">
+<form >
+    
+    
   </form>
 {% endblock %}

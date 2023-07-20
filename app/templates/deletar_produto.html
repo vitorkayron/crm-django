@@ -10,25 +10,32 @@
 
 {% block 'content' %}
 <header>
-  <div class="container-fluid card d-flex justify-content-center align-items-center m-auto bg-primary-subtle">
+  <div 
+  class="container-fluid card d-flex justify-content-center
+  align-items-center m-auto bg-primary-subtle">
       <h1>CRM</h1>
       <h2>Deletar produto</h2>
   </div>
 </header>
-
-<h2>Você quer deletar mesmo o produto
-  <em
-  class="text-danger">
-  {{produto.nome}}
-  </em> ?
-</h2>
-
-<form action="{% url 'deletar_produto' pk=produto.id %}" method="POST">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button class="btn btn-outline-secondary" type="submit" value="Deletar">Deletar</button>
-  <button class="btn btn-outline-danger" href="{% url 'home' %}"> Cancelar
-  </button>
-  
-</form>
+<main>
+  <div
+  class="card content-fluid d-flex flex-column justify-content-center
+  align-items-center m-auto mt-2 p-4 gap-2"
+  style="width: 60%;">
+    <h2>Deseja, de fato, excluir este item:
+      <em class="text-danger">{{produto.nome}}</em> ?
+    </h2>
+    <form
+    action="{% url 'deletar_produto' pk=produto.id %}" method="POST">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button
+      class="btn btn-outline-danger btn-lg"
+      type="submit"
+      value="Deletar">Deletar</button>
+      <a class="btn btn-outline-secondary btn-lg"
+      href="{% url 'home' %}"> Cancelar</a>
+    </form>
+  </div>
+</main>
 {% endblock %}

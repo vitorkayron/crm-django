@@ -10,35 +10,38 @@ CRM
 
 {% block 'content' %}
 <header class="container-fluid">
-    <div class="card d-flex justify-content-center align-items-center m-auto bg-primary-subtle">
+    <div
+    class="card d-flex justify-content-center
+    align-items-center m-auto bg-primary-subtle">
         <h1>CRM</h1>
         <h2>Produtos Cadastrados</h2>
     </div>
-    <div class="container-fluid d-flex justify-content-md-center mt-2" style="gap: 5px;">
-        <div class="card d-flex flex-column p-1 bg-warning-subtle">
-            <p>Meta anual: R$ 5 milhões</p>
-            <p>Vendido no ano: R$ 2,63 milhões</p>
-        </div>
-        <div class="card d-flex justify-content-center p-1 bg-success bg-opacity-50">
-            <h5>Saldo total: R$ {{ faturamento_total }} </h5>
+    <div class="container-fluid d-flex justify-content-md-center mt-2">
+        <div
+        class="card d-flex justify-content-center
+        p-1 bg-success bg-opacity-50 p-2">
+            <h5>Saldo total: R$ {{ faturamento_total }}</h5>
         </div>
     </div>
 </header>
-<main class="container-fluid my-2 table-responsive" style="width:90% ;">
+<main
+class="container-fluid my-2 table-responsive"
+style="width:90% ;">
     <button class="my-2">
         <a class="icon-link btn" href="{% url 'novo_produto' %}">
             Adicionar novo produto
         </a>
     </button>
-    <table class="table table-bordered ">
+    <table class="table table-bordered">
         <thead>
             <tr>
                 <th scope="col">Produto</th>
                 <th scope="col">Preço</th>
                 <th scope="col">Estoque</th>
-                <th scope="col">Atualizar produto</th>
-                <th scope="col">Deletar produto</th>
+                <th scope="col">Editar informações</th>
                 <th scope="col">Vender produto</th>
+                <th scope="col">Receita gerada</th>
+                <th scope="col">Deletar produto</th>
             </tr>
         </thead>
         <tbody>
@@ -48,23 +51,27 @@ CRM
                 <td> R$ {{ produto.valor }}</td>
                 <td>{{ produto.quantidade_estoque }} itens</td>
                 <td>
-                    <a class="btn btn-outline-primary" href="{% url 'atualizar_produto' produto.id %}">Atualizar</a>
+                    <a
+                    class="btn btn-outline-primary"
+                    href="{% url 'atualizar_produto' produto.id %}">Editar</a>
                 </td>
                 <td>
-                    <a class="btn btn-outline-warning" href="{% url 'deletar_produto' produto.id %}">Deletar</a>
+                    <a
+                    class="btn btn-outline-success"
+                    href="{% url 'venda' produto.id %}">Vender</a>
                 </td>
                 <td>
-                    <a class="btn btn-outline-success" href="{% url 'venda' produto.id %}">Vender</a>
+                    SALDO DO PRODUTO
+                </td>
+                <td>
+                    <a
+                    class="btn btn-outline-warning"
+                    href="{% url 'deletar_produto' produto.id %}">Deletar</a>
                 </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 </main>
-
-
-  <h2></h2>
-  <h4></h4>
-  
 
 {% endblock %}
