@@ -20,7 +20,7 @@ CRM
         <div
         class="card d-flex justify-content-center
         p-1 bg-success bg-opacity-50 p-2">
-            <h5>Saldo total: R$ {{ faturamento_total }}</h5>
+            <h5>Saldo total: R$ {{ faturamento_total | floatformat:2 }}</h5>
         </div>
     </div>
 </header>
@@ -46,9 +46,10 @@ style="width:90% ;">
         </thead>
         <tbody>
             {% for produto in produtos %}
+            {% if produto.quantidade_estoque > 0 %}
             <tr>
                 <td>{{ produto.nome }}</td>
-                <td> R$ {{ produto.valor }}</td>
+                <td> R$ {{ produto.valor | floatformat:2 }}</td>
                 <td>{{ produto.quantidade_estoque }} itens</td>
                 <td>
                     <a
@@ -69,6 +70,7 @@ style="width:90% ;">
                     href="{% url 'deletar_produto' produto.id %}">Deletar</a>
                 </td>
             </tr>
+            {% endif %}
             {% endfor %}
         </tbody>
     </table>
