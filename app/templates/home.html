@@ -38,9 +38,10 @@ style="width:90% ;">
                 <th scope="col">Produto</th>
                 <th scope="col">Preço</th>
                 <th scope="col">Estoque</th>
+                <th scope="col">Itens vendidos</th>
+                <th scope="col">Receita gerada</th>
                 <th scope="col">Editar informações</th>
                 <th scope="col">Vender produto</th>
-                <th scope="col">Receita gerada</th>
                 <th scope="col">Deletar produto</th>
             </tr>
         </thead>
@@ -51,16 +52,16 @@ style="width:90% ;">
                 <td>{{ produto.nome }}</td>
                 <td> R$ {{ produto.valor | floatformat:2 }}</td>
                 <td>{{ produto.quantidade_estoque }} itens</td>
+                 <td>
+                    {{ produto.venda_set.count }}
+                </td>
+                <td>
+                    R$ {{ produto.faturamento | floatformat:2 }}
+                </td>
                 <td>
                     <a
                     class="btn btn-outline-primary"
                     href="{% url 'atualizar_produto' produto.id %}">Editar</a>
-                </td>
-                <td>
-                    Quantidade de Vendas: {{ produto.venda_set.count }}
-                </td>
-                <td>
-                    Faturamento: R$ {{ produto.faturamento | floatformat:2 }}
                 </td>
                 <td>
                     <a
@@ -68,11 +69,8 @@ style="width:90% ;">
                     href="{% url 'venda' produto.id %}">Vender</a>
                 </td>
                 <td>
-                    SALDO DO PRODUTO
-                </td>
-                <td>
                     <a
-                    class="btn btn-outline-warning"
+                    class="btn btn-outline-danger"
                     href="{% url 'deletar_produto' produto.id %}">Deletar</a>
                 </td>
             </tr>

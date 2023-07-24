@@ -22,7 +22,7 @@
   class="card content-fluid d-flex flex-column justify-content-center
   align-items-center m-auto mt-2 p-4 gap-2"
   style="width: 60%;">
-    <h2>Deseja, de fato, excluir este item:
+    <h2>Deseja, de fato, excluir o item
       <em class="text-danger">{{produto.nome}}</em> ?
     </h2>
     <form
@@ -30,11 +30,11 @@
       {% csrf_token %}
       {{ form.as_p }}
       <button
-      class="btn btn-outline-danger btn-lg"
+      class="btn btn-outline bg-danger bg-opacity-50 btn-lg"
       type="submit"
       value="Deletar">Deletar</button>
       <a class="btn btn-outline-secondary btn-lg"
-      href="{% url 'home' %}"> Cancelar</a>
+      href="{% url 'home' %}">Cancelar</a>
     </form>
   </div>
 </main>
