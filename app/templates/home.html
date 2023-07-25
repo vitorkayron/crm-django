@@ -47,16 +47,15 @@ style="width:90% ;">
         </thead>
         <tbody>
             {% for produto in produtos %}
-            {% if produto.quantidade_estoque > 0 %}
             <tr>
                 <td>{{ produto.nome }}</td>
-                <td> R$ {{ produto.valor | floatformat:2 }}</td>
+                <td> R$ {{ produto.valor }}</td>
                 <td>{{ produto.quantidade_estoque }} itens</td>
                  <td>
-                    {{ produto.venda_set.count }}
+                    {{ produto.qtd_vendas }}
                 </td>
                 <td>
-                    R$ {{ produto.faturamento | floatformat:2 }}
+                    R$ {{ produto.faturamento }}
                 </td>
                 <td>
                     <a
@@ -74,7 +73,6 @@ style="width:90% ;">
                     href="{% url 'deletar_produto' produto.id %}">Deletar</a>
                 </td>
             </tr>
-            {% endif %}
             {% endfor %}
         </tbody>
     </table>

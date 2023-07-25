@@ -2,9 +2,9 @@ from django.db import models
 
 class Produto(models.Model):
     nome = models.CharField(max_length=100)
-    valor = models.DecimalField(max_digits=10, decimal_places=3)
+    valor = models.DecimalField(max_digits=10, decimal_places=2)
     quantidade_estoque = models.PositiveIntegerField(default=0)
-    faturamento = models.DecimalField(max_digits=10, decimal_places=3, default=0)
+    faturamento = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     qtd_vendas = models.PositiveIntegerField(default=0)
 
     def __str__(self):
@@ -19,7 +19,7 @@ class Venda(models.Model):
     produto = models.ForeignKey(Produto, on_delete=models.CASCADE, null=True)
     quantidade_vendida = models.PositiveIntegerField(default=0)
     data_venda = models.DateField(auto_now_add=True)
-    valor_venda = models.DecimalField(max_digits=10, decimal_places=3, default=0)
+    valor_venda = models.DecimalField(max_digits=10, decimal_places=2, default=0)
 
     def __str__(self):
         if self.produto:
@@ -36,7 +36,7 @@ class Venda(models.Model):
 
 class Saldo(models.Model):
     produto = models.OneToOneField(Produto, on_delete=models.CASCADE, null=True)
-    faturamento = models.DecimalField(max_digits=10, decimal_places=3, default=0)
+    faturamento = models.DecimalField(max_digits=10, decimal_places=2, default=0)
 
     def __str__(self):
         return str(self.produto)
