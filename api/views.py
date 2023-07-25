@@ -1,5 +1,5 @@
-from app.models import Produto, Venda
-from api.serializers import ProdutoSerializer, VendaSerializer
+from app.models import Produto, Venda, Saldo
+from api.serializers import ProdutoSerializer, VendaSerializer, SaldoSerializer
 from rest_framework import generics
 class ProdutoList(generics.ListCreateAPIView):
     queryset = Produto.objects.all()
@@ -17,4 +17,12 @@ class VendaList(generics.ListCreateAPIView):
 class VendaDetail(generics.RetrieveDestroyAPIView):
     queryset = Venda.objects.all()
     serializer_class = VendaSerializer
+
+class SaldoList(generics.ListCreateAPIView):
+    queryset = Saldo.objects.all()
+    serializer_class = SaldoSerializer
+
+class SaldoDetail(generics.RetrieveDestroyAPIView):
+    queryset = Saldo.objects.all()
+    serializer_class = SaldoSerializer
 
