@@ -18,11 +18,3 @@ class VendaDetail(generics.RetrieveDestroyAPIView):
     queryset = Venda.objects.all()
     serializer_class = VendaSerializer
 
-class SaldoList(generics.ListCreateAPIView):
-    queryset = Saldo.objects.all()
-    serializer_class = SaldoSerializer
-
-class SaldoDetail(generics.RetrieveDestroyAPIView):
-    queryset = Saldo.objects.all()
-    serializer_class = SaldoSerializer
-

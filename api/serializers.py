@@ -11,7 +11,3 @@ class VendaSerializer(serializers.ModelSerializer):
         model = Venda
         fields = "__all__"
 
-class SaldoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Saldo
-        fields = "__all__"
