@@ -5,8 +5,10 @@ from api import views
 app_name = 'api'
 
 urlpatterns = [
-    path('', views.ProdutoList.as_view()),
-    path('<int:pk>/', views.ProdutoDetail.as_view()),
+    path('produto/', views.ProdutoList.as_view()),
+    path('produto/<int:pk>/', views.ProdutoDetail.as_view()),
+    path('venda/', views.VendaList.as_view()),
+    path('produto/<int:pk>', views.VendaDetail.as_view())
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
