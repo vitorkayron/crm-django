@@ -1,5 +1,5 @@
-from app.models import Produto, Venda, Saldo
-from api.serializers import ProdutoSerializer, VendaSerializer, SaldoSerializer
+from app.models import Produto, Venda
+from api.serializers import ProdutoSerializer, VendaSerializer
 from rest_framework import generics
 class ProdutoList(generics.ListCreateAPIView):
     queryset = Produto.objects.all()
