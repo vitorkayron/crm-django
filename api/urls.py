@@ -1,5 +1,4 @@
 from django.urls import path
-from rest_framework.urlpatterns import format_suffix_patterns
 from api import views
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
@@ -11,7 +10,7 @@ schema_view = get_schema_view(
     openapi.Info(
         title="CRM API",
         default_version="v1",
-        description="API for Products, Sales and Balance",
+        description="API for Products, Sales, and Balance",
         terms_of_service="https://www.ourapp.com/policies/terms/",
         contact=openapi.Contact(email="contact@swagger.Blog.local"),
         license=openapi.License(name="Test License")
@@ -20,15 +19,11 @@ schema_view = get_schema_view(
     permission_classes=(permissions.AllowAny,),
 )
 
-
-
 urlpatterns = [
-    path('produto/', views.ProdutoList.as_view()),
-    path('produto/<int:pk>/', views.ProdutoDetail.as_view()),
-    path('venda/', views.VendaList.as_view()),
-    path('produto/<int:pk>', views.VendaDetail.as_view()),
-    path('', schema_view.with_ui('swagger', cache_timeout=0), name="schema-swagger-ui"),
-    path('redoc', schema_view.with_ui('redoc', cache_timeout=0), name="schema_redoc")
+    path('produto/', views.ProdutoList.as_view(), name='produto-list'),
+    path('produto/<int:pk>/', views.ProdutoDetail.as_view(), name='produto-detail'),
+    path('venda/', views.VendaList.as_view(), name='venda-list'),
+    path('produto/<int:pk>', views.VendaDetail.as_view(), name='venda-detail'),
+    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema_redoc'),
 ]
-
-urlpatterns = format_suffix_patterns(urlpatterns)
