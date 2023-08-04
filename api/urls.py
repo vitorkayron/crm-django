@@ -26,6 +26,7 @@ urlpatterns = [
     path('venda/<int:pk>', views.VendaDetail.as_view(), name='venda-detail'),
     path('saldo/', views.SaldoList.as_view(), name='saldo-detail'),
     path('saldo/<int:pk>', views.SaldoDetail.as_view(), name='saldo-detail'),
+    path('faturamento', views.faturamento_total, name='faturamento_total'),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema_redoc'),
 ]
