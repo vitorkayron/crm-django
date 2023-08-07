@@ -6,6 +6,7 @@ from django.views.generic.list import ListView
 from django.views.generic import CreateView
 from django.views.generic.edit import UpdateView, DeleteView
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
 
 
 def calcular_faturamento():
@@ -18,6 +19,7 @@ class HomeListView(ListView):
     model = Produto
     context_object_name = "produtos"
 
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         faturamento_total = calcular_faturamento()

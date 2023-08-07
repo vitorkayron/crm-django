@@ -9,6 +9,7 @@ CRM
 {% endblock %}
 
 {% block 'content' %}
+{% if request.user.is_authenticated %}
 <header>
     <div
     class="d-flex flex-column justify-content-center
@@ -78,5 +79,8 @@ style="width:90%;">
         </tbody>
     </table>
 </main>
+{% else %}
+<a href="{% url 'login' %}">Log-in</a>
+{% endif %}
 
 {% endblock %}

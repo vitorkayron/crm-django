@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     #apps
     'app',
     'api',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -155,3 +156,7 @@ SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=10),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }
+
+LOGIN_REDIRECT_URL = 'home'
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
