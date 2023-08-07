@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .forms import LoginForm
+from .forms import LoginForm, UserRegistrationForm
 from django.http import HttpResponse
 
 from django.contrib.auth import authenticate, login
@@ -24,3 +24,16 @@ def user_login(request):
     else:
         form = LoginForm()
         return render(request, 'accounts/login.html', {'form': form})
+    
+
+def register(request):
+    if request.method == 'POST':
+        user_form = UserRegistrationForm(request.POST)
+        if user_form.is_valid():
+            newuser = user_form.save(commit=False)
+            newuser.set_password(user_form.cleaned_data['password'])  # Correção: set_password, não set_passoetd
+            newuser.save()
+            return render(request, 'registration/register_done.html', {'new_user': newuser})
+    else:
+        user_form = UserRegistrationForm()  # 
+    return render(request, 'registration/register.html', {'user_form': user_form})  
