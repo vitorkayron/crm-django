@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import LoginForm, UserRegistrationForm
 from django.http import HttpResponse
 
@@ -31,9 +31,15 @@ def register(request):
         user_form = UserRegistrationForm(request.POST)
         if user_form.is_valid():
             newuser = user_form.save(commit=False)
-            newuser.set_password(user_form.cleaned_data['password'])  # Correção: set_password, não set_passoetd
+            newuser.set_password(user_form.cleaned_data['password'])
             newuser.save()
-            return render(request, 'registration/register_done.html', {'new_user': newuser})
+
+            user = authenticate(username=user_form.cleaned_data['username'], password=user_form.cleaned_data['password'])
+            
+            if user is not None:
+                login(request, user)
+                return redirect('home') 
     else:
-        user_form = UserRegistrationForm()  # 
+        user_form = UserRegistrationForm()  
     return render(request, 'registration/register.html', {'user_form': user_form})  
+    
