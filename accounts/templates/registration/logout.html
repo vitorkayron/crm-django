@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block 'title' %}
+Logged out
+{% endblock %}
+
+{% block 'content' %}
+<header>
+    <div
+    class="d-flex flex-column justify-content-center
+    align-items-center bg-secondary">
+        <h1>CRM</h1>
+        <h2>Obrigado! </h2>
+    </div>
+</header>
+<main class="d-flex align-items-center justify-content-center m-5">
+    <div class="card d-flex flex-column 
+     bg-warning p-3 ">
+     <h1 class="m-auto">Desconectado</h1>
+        <div class="d-flex flex-column justify-content-center
+        align-items-center m-3">
+            <p>
+            Você foi desconectado com sucesso! Clique aqui para
+                <a href="{% url 'login' %}">entrar novamente</a>.
+            </p>
+        </div>
+    </div>
+</main
+{% endblock %}

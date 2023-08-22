@@ -1,0 +1,17 @@
+form{
+    padding: 20px;
+}
+
+form label{
+    width: 10%;
+    font-weight: 500;
+}
+
+form input{
+    padding: 5px ;
+    width: 100%;
+}
+
+form input:focus{
+    outline-color:#0d6efd ;
+}

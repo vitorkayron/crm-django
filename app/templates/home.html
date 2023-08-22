@@ -9,31 +9,42 @@ CRM
 {% endblock %}
 
 {% block 'content' %}
-{% if request.user.is_authenticated %}
 <header>
     <div
     class="d-flex flex-column justify-content-center
-    align-items-center bg-secondary"
-    >
+    align-items-center bg-secondary">
         <h1>CRM</h1>
         <h2>Produtos Cadastrados</h2>
+        {% if request.user.is_authenticated %}
+        <h5 class="text-white">Seja bem vindo(a), {{ user.username }}!</h5>
+        
+        <p class="d-flex flex column card bg-secondary position-absolute top-0 end-0 me-2 p-2">
+            <a class="icon-link icon-link-hover text-white text-decoration-none" href="{% url 'password_change' %}">Mudar senha</a>
+            <a class="icon-link icon-link-hover text-white text-decoration-none" style="--bs-icon-link-transform: translate3d(-0.3em, 0, 0);" href="{% url 'logout' %}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-left" aria-hidden="true" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0v-2z"/>
+                    <path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>
+                  </svg>
+                Sair
+            </a>
+        </p>
     </div>
     <div class="container-fluid d-flex justify-content-md-center mt-2">
         <div
-        class="card d-flex justify-content-center
+        class="card d-flex
         p-1 bg-success bg-opacity-50 p-2">
             <h5>Saldo total: R$ {{ faturamento_total | floatformat:2 }}</h5>
         </div>
+        {% endif %}
     </div>
 </header>
+{% if request.user.is_authenticated %}
 <main
 class="container-fluid my-2 table-responsive"
 style="width:90%;">
-    <button class="my-2">
-        <a class="icon-link btn" href="{% url 'novo_produto' %}">
+        <a class="btn bg-warning my-2" href="{% url 'novo_produto' %}">
             Adicionar novo produto
         </a>
-    </button>
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -80,7 +91,17 @@ style="width:90%;">
     </table>
 </main>
 {% else %}
-<a href="{% url 'login' %}">Log-in</a>
+<main class="d-flex align-items-start justify-content-around my-5">
+    <div class="card d-flex flex-column 
+     bg-warning w-25 p-3">
+        <h4 class="card-title">
+           Você não tem permissão para acessar essa página!
+        </h4>
+        <p>É necessário estar logado para ver os dados dos produtos.</p>
+        <a class="btn text-decoration-none bg-outline-primary" href="{% url 'login' %}">Fala login aqui</a>
+    </div>
+</main> 
+
 {% endif %}
 
 {% endblock %}
